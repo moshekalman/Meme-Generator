@@ -37,12 +37,19 @@ body {
     background-color: #22252c;
 }
 
-a{
+a {
+    text-align: center;
     cursor: pointer;
+    color: #ffffff;
+}
+
+ul {
+    width: 22.5rem;
 }
 
 img {
     width: 100%;
+    cursor: pointer;
 }
 
 input {
@@ -52,6 +59,7 @@ input {
 
 button {
     outline: none;
+    cursor: pointer;
 }
 
 /* Layout */
@@ -85,8 +93,12 @@ button {
     margin: 0 auto;
     height: 400px;
     width: 400px;
-    border: 5px solid #3d3d3d8f;
     border-radius: 30px;
+}
+
+canvas {
+    border-radius: 30px;
+    border: 5px solid #3d3d3d8f;
 }
 
 .meme-editor {
@@ -164,6 +176,27 @@ input.line-text {
     background-color: #ffffff;
 }
 
+.main-nav ul li{
+    width: 7.25rem;
+    height: 2.5rem;
+    border-radius: 20px;
+}
+.main-nav ul li a:hover {
+    color: #21ac91;
+}
+
+.checked{
+width: 7.25rem;
+height: 2.5rem;
+box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+border-radius: 20px;
+background-color: #fefefe; 
+}
+
+.checked > *{
+    color: #21ac91;
+}
+
 /* helpers */
 
 .clean-list {
@@ -193,7 +226,7 @@ input.line-text {
 }
 
 .flex.just-center {
-    justify-items: center;
+    justify-content: center;
 }
 
 .flex.wrap {
@@ -204,13 +237,13 @@ input.line-text {
     display: none;
 }
 
-.show{
+.show {
     display: block;
 }
 
-@media screen and (min-width: 820px) {
-    img .hamburger {
-        display: hide;
+@media (min-width: 820px) {
+    .hidePNG {
+        display: none;
     }
 
     .main-nav ul {

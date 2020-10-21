@@ -11,11 +11,13 @@
       <div class="header-container flex space-between align-center">
         <h1 class="logo">MemeZ</h1>
         <nav class="main-nav">
-          <img  src="imgs/Hamburger.svg" alt="Menu" class="hamburger">
+          <div class="hamburger hidePNG">
+            <img  src="imgs/Hamburger.svg" alt="Menu">
+          </div>
           <ul class="clean-list hide">
-            <li><a onclick="openGallery()" >Gallery </a></li>
-            <li><a onclick="openEditor()" >Editor</a></li>
-            <li><a >About</a></li>
+            <li class="gallery-link flex align-center just-center"><a onclick="openGallery()" >Gallery </a></li>
+            <li  class="editor-link flex align-center just-center"><a onclick="openEditor()" >Editor</a></li>
+            <li class="memes-link flex align-center just-center"><a >Saved Memes</a></li>
           </ul>
         </nav>
       </header>
@@ -52,10 +54,10 @@
   <div class="font-properties flex space-between">
       <button class="font-size" onclick="onFontSizeChange(+2)">A+</button>
       <button class="font-size" onclick="onFontSizeChange(-2)">A-</button>
-      <button class="line-height" onclick="onLineHeightChange(-2)">
+      <button class="line-height" onclick="onLineHeightChange(-10)">
         Higher
       </button>
-      <button class="line-height" onclick="onLineHeightChange(+2)">
+      <button class="line-height" onclick="onLineHeightChange(+10)">
         Lower
       </button>
     </div>

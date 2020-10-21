@@ -8,46 +8,58 @@
   </head>
   <body onload="init()">
     <header class="main-header">
-      <h1 class="logo">Meme-Generator</h1>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="http://">Gallery</a></li>
-          <li><a href="http://">Editor</a></li>
-          <li><a href="http://">About</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main class="gallery grid"></main>
-    <main class="meme-editor">
-      <div class="canvas-container">
-        <canvas id="my-canvas" height="450" width="450"></canvas>
+      <div class="header-container flex space-between align-center">
+        <h1 class="logo">MemeZ</h1>
+        <nav class="main-nav">
+          <img  src="imgs/Hamburger.svg" alt="Menu" class="hamburger">
+          <ul class="clean-list hide">
+            <li><a onclick="openGallery()" >Gallery </a></li>
+            <li><a onclick="openEditor()" >Editor</a></li>
+            <li><a >About</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="meme-gallery">
+<div class="gallery-container gallery grid">
+
+</div>
+      </main>
+
+      <main class="meme-editor flex wrap hide">
+        <div class="canvas-container">
+          <canvas id="my-canvas" height="400" width="400"></canvas>
       </div>
-      <aside>
+<div class="meme-properties flex column space-around">
+  <input
+  class="line-text"
+    type="text"
+    name="text"
+    id="text"
+    placeholder="Edit Text"
+    onkeyup="onNewText(value)"
+  />
+  <div class="flex space-around">
+    <button class="line-switch flex align-center" onclick="onSwitchLines()">
+      <img src="imgs/arrow-up.svg">
+      <img src="imgs/arrow-down.svg">
+    </button>
+    <button class="add-line flex align-center">
+      <h3 class="add">+</h3>
+    </button>
+  </div>
 
-        <input
-        class="line-text"
-          type="text"
-          name="text"
-          id="text"
-          placeholder="Edit Text"
-          onkeyup="onNewText(value)"
-        />
-
-        <div class="font-properties">
-          <button class="font-size" onclick="onFontSizeChange(+2)">A+</button>
-          <button class="font-size" onclick="onFontSizeChange(-2)">A-</button>
-          <button class="line-height" onclick="onLineHeightChange(-2)">
-            Higher
-          </button>
-          <button class="line-height" onclick="onLineHeightChange(+2)">
-            Lower
-          </button>
-          <button class="line-switch" onclick="onSwitchLines()">
-            Switch Lines
-          </button>
-        </div>
-
-      </aside>
+  <div class="font-properties flex space-between">
+      <button class="font-size" onclick="onFontSizeChange(+2)">A+</button>
+      <button class="font-size" onclick="onFontSizeChange(-2)">A-</button>
+      <button class="line-height" onclick="onLineHeightChange(-2)">
+        Higher
+      </button>
+      <button class="line-height" onclick="onLineHeightChange(+2)">
+        Lower
+      </button>
+    </div>
+</div>
     </main>
 
     <script src="js/util.js"></script>

@@ -14,7 +14,7 @@ function renderGallery() {
     var imgs = getImgs();
     var strHTML = '';
     imgs.forEach(img => {
-        strHTML += `<img onclick="renderCanvas(${img.id})" src="${img.url}">`;
+        strHTML += `<img onclick="renderCanvas(${img.id}); openEditor()" src="${img.url}">`;
     });
 
     elGallery.innerHTML = strHTML;
@@ -71,4 +71,18 @@ function onSwitchLines() {
     var memeText = currMeme.lines[getLineIdx()].txt;
     var elLineInput = document.querySelector('.line-text');
     elLineInput.value = memeText;
+}
+
+function openGallery() {
+    var elGallery = document.querySelector('.meme-gallery');
+    elGallery.classList.remove('hide');
+    var elEditor = document.querySelector('.meme-editor');
+    elEditor.classList.remove('show');
+}
+
+function openEditor() {
+    var elGallery = document.querySelector('.meme-gallery');
+    elGallery.classList.add('hide');
+    var elEditor = document.querySelector('.meme-editor');
+    elEditor.classList.add('show');
 }

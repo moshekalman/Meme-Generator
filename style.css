@@ -53,8 +53,16 @@ text-transform: uppercase;
 }
 
 .gallery.grid{
+    /* display: none; */
     grid-gap: 15px;
     padding: 20px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     align-items: center;
+}
+
+.canvas-container{
+    margin: 0 auto;
+    height: 450px;
+    width: 450px;
+    outline: 3px solid #000000;
 }

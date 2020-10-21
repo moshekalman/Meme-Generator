@@ -19,10 +19,17 @@
     </header>
       <main class="gallery grid">
       </main>
+      <main class="meme-editor">
+        <div class="canvas-container">
+          <canvas id="my-canvas" height="450" width="450"></canvas>
+        </div>
+        <aside>
+          <input type="text" name="text" id="text" placeholder="Edit Text" onkeyup="onNewText(value)">
+        </aside>
+      </main>
 
       <script src="js/util.js"></script>
-      <script src="js/gallery-service.js"></script>
-      <script src="js/gallery-controller.js"></script>
-
+      <script src="js/meme-service.js"></script>
+      <script src="js/meme-controller.js"></script>
   </body>
 </html>

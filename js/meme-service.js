@@ -2,6 +2,7 @@
 
 // var gKeywords = { 'happy': 12, 'funny puk': 1 };
 var gImgs = _createImgs();
+var gCurrLineIdx = 0;
 var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
@@ -11,7 +12,16 @@ var gMeme = {
             size: 48,
             align: 'center',
             color: 'red',
-            font: 'impact'
+            font: 'impact',
+            height: 0
+        },
+        {
+            txt: 'When Im Full',
+            size: 48,
+            align: 'center',
+            color: 'red',
+            font: 'impact',
+            height: 380
         }
     ]
 };
@@ -39,10 +49,25 @@ function getMeme() {
 }
 
 function changeMemeText(txt) {
-    gMeme.lines[0].txt = txt;
+    gMeme.lines[gCurrLineIdx].txt = txt;
 }
 
-function getCurrMemeIdx(){
-    console.log(gMeme)
+function getCurrMemeIdx() {
     return gMeme.selectedImgId;
+}
+
+function changeFontSize(diff) {
+    gMeme.lines[gCurrLineIdx].size += diff;
+}
+
+function changeLineHeight(diff) {
+    gMeme.lines[gCurrLineIdx].height += diff;
+}
+
+function switchLines() {
+    gCurrLineIdx = (gCurrLineIdx === 0) ? 1 : 0;
+}
+
+function getLineIdx() {
+    return gCurrLineIdx;
 }

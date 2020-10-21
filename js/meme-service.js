@@ -43,5 +43,6 @@ function changeMemeText(txt) {
 }
 
 function getCurrMemeIdx(){
+    console.log(gMeme)
     return gMeme.selectedImgId;
 }

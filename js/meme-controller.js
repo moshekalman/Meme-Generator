@@ -1,5 +1,7 @@
 'use strict';
 
+var gSavedMemes = getSavedMemes();
+
 var gCanvas;
 var gCtx;
 
@@ -7,6 +9,22 @@ function init() {
     gCanvas = document.querySelector('#my-canvas');
     gCtx = gCanvas.getContext('2d');
     renderGallery();
+    const currMeme = getMeme();
+    var memeText = currMeme.lines[getLineIdx()].txt;
+    var elLineInput = document.querySelector('.line-text');
+    elLineInput.value = '';
+    elLineInput.placeholder = memeText;
+    renderSavedGallery();
+}
+
+function renderSavedGallery() {
+    var elGallery = document.querySelector('.archive');
+    var strHTML = '';
+    gSavedMemes.forEach(meme => {
+        strHTML += `<img src="${meme}">`;
+    });
+
+    elGallery.innerHTML = strHTML;
 }
 
 function renderGallery() {
@@ -59,7 +77,6 @@ function onFontSizeChange(diff) {
 }
 
 function onLineHeightChange(diff) {
-    console.log(diff);
     changeLineHeight(diff);
     const currImgId = getCurrMemeIdx();
     renderCanvas(currImgId);
@@ -71,29 +88,80 @@ function onSwitchLines() {
     var memeText = currMeme.lines[getLineIdx()].txt;
     var elLineInput = document.querySelector('.line-text');
     elLineInput.value = '';
+    elLineInput.placeholder = memeText;
 }
 
 function openGallery() {
-    var elGallery = document.querySelector('.meme-gallery');
+    const elGallery = document.querySelector('.meme-gallery');
     elGallery.classList.remove('hide');
-    var elEditor = document.querySelector('.meme-editor');
+    const elEditor = document.querySelector('.meme-editor');
+    elEditor.classList.remove('show');
+    const elArchive = document.querySelector('.saved-memes');
     elEditor.classList.remove('show');
 
-    var elGalleryLi = document.querySelector('.gallery-link');
-    elGalleryLi.classList.add('checked')
-    var elEditorLi = document.querySelector('.editor-link');
-    elEditorLi.classList.remove('checked')
+    const elGalleryLi = document.querySelector('.gallery-link');
+    elGalleryLi.classList.add('checked');
+    const elEditorLi = document.querySelector('.editor-link');
+    elEditorLi.classList.remove('checked');
+    const elArchiveLi = document.querySelector('.archive-link');
+    elArchiveLi.classList.remove('checked');
 
 }
 
 function openEditor() {
-    var elGallery = document.querySelector('.meme-gallery');
+    const elGallery = document.querySelector('.meme-gallery');
     elGallery.classList.add('hide');
-    var elEditor = document.querySelector('.meme-editor');
+    const elEditor = document.querySelector('.meme-editor');
     elEditor.classList.add('show');
+    const elArchive = document.querySelector('.saved-memes');
+    elArchive.classList.remove('show');
 
-    var elGalleryLi = document.querySelector('.gallery-link');
-    elGalleryLi.classList.remove('checked')
-    var elEditorLi = document.querySelector('.editor-link');
-    elEditorLi.classList.add('checked')
+    const elGalleryLi = document.querySelector('.gallery-link');
+    elGalleryLi.classList.remove('checked');
+    const elEditorLi = document.querySelector('.editor-link');
+    elEditorLi.classList.add('checked');
+    const elArchiveLi = document.querySelector('.archive-link');
+    elArchiveLi.classList.remove('checked');
+
+}
+
+function openArchive() {
+    const elGallery = document.querySelector('.meme-gallery');
+    elGallery.classList.add('hide');
+    const elEditor = document.querySelector('.meme-editor');
+    elEditor.classList.remove('show');
+    const elArchive = document.querySelector('.saved-memes');
+    elArchive.classList.add('show');
+
+    const elGalleryLi = document.querySelector('.gallery-link');
+    elGalleryLi.classList.remove('checked');
+    const elEditorLi = document.querySelector('.editor-link');
+    elEditorLi.classList.remove('checked');
+    const elArchiveLi = document.querySelector('.archive-link');
+    elArchiveLi.classList.add('checked');
+}
+
+function onSaveMeme() {
+    const meme = gCanvas.toDataURL();
+    gSavedMemes.push(meme);
+    saveMemes(gSavedMemes);
+    renderSavedGallery();
+}
+
+function onAddLine() {
+    addLine();
+    const currImgId = getCurrMemeIdx();
+    renderCanvas(currImgId);
+}
+
+function onDeleteLine() {
+    deleteLine();
+    const currImgId = getCurrMemeIdx();
+    renderCanvas(currImgId);
+}
+
+function onCanvasClick(ev) {
+    var currMeme = getMeme();
+    const X = ev.offsetX;
+    const Y = ev.offsetY;
 }

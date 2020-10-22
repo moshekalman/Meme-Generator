@@ -1,10 +1,12 @@
 'use strict';
 
+const SAVED_MEMES = 'savedMemesDB';
+
 // var gKeywords = { 'happy': 12, 'funny puk': 1 };
 var gImgs = _createImgs();
 var gCurrLineIdx = 0;
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: null,
     selectedLineIdx: 0,
     lines: [
         {
@@ -33,6 +35,10 @@ function _createImgs() {
         imgs.push(img);
     }
     return imgs;
+}
+
+function _addKeyWords() {
+    var keyWords = ['Happy', 'Funny', 'Troll', 'Bamboozeled', 'Pollitics'];
 }
 
 function getImgs() {
@@ -65,9 +71,34 @@ function changeLineHeight(diff) {
 }
 
 function switchLines() {
-    gCurrLineIdx = (gCurrLineIdx === 0) ? 1 : 0;
+    if (gCurrLineIdx + 1 === gMeme.lines.length) gCurrLineIdx = 0;
+    else gCurrLineIdx++;
 }
 
 function getLineIdx() {
     return gCurrLineIdx;
+}
+
+function saveMemes(savedMemes) {
+    saveToLocalStorage(SAVED_MEMES, savedMemes);
+}
+
+function getSavedMemes() {
+    return (LoadFromLocalStorage(SAVED_MEMES)) ? LoadFromLocalStorage(SAVED_MEMES) : [];
+}
+
+function deleteLine() {
+    if (gMeme.lines.length === 0) return;
+    gMeme.lines.splice(gCurrLineIdx, 1);
+}
+
+function addLine() {
+    gMeme.lines.push({
+        txt: 'New Line',
+        size: 48,
+        align: 'center',
+        color: 'red',
+        font: 'impact',
+        height: 180
+    });
 }

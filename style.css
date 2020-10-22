@@ -89,6 +89,22 @@ button {
     border-radius: 5px;
 }
 
+.archive.grid {
+    /* display: none; */
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    align-items: center;
+    background-color: #383b42;
+    border-radius: 5px;
+}
+
+.archive img {
+    border: 2px dashed seashell;
+    border-radius: 5px;
+}
+
+
 .canvas-container {
     margin: 0 auto;
     height: 400px;
@@ -101,7 +117,8 @@ canvas {
     border: 5px solid #3d3d3d8f;
 }
 
-.meme-editor {
+.meme-editor,
+.saved-memes {
     padding: 20px;
 }
 
@@ -123,7 +140,7 @@ canvas {
 }
 
 .meme-properties {
-    margin: 0 auto;
+    margin: 0;
     width: 400px;
     height: 400px;
 }
@@ -146,6 +163,31 @@ canvas {
     background-image: linear-gradient(-38deg, #42eb5c 0%, #37b34a 100%);
 }
 
+.delete-line {
+    width: 58px;
+    height: 53px;
+    box-shadow: 1px 5px 0 #8c0606, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+    background-color: #ebeef3;
+    background-image: linear-gradient(-38deg, #cf1d37 0%, #cf1d37 1%, #f05036 100%);
+}
+
+.delete-line img{
+width: 2em;
+height: 2.5em;
+}
+
+.save-btn {
+    font-family: PoppinsSB, sans-serif;
+    color: #fff;
+    font-size: 1.3rem;
+    width: 213px;
+    height: 51px;
+    box-shadow: 1px 6px 0 #55b81b, inset 0 5px 0 #ffffff;
+    border-radius: 15px;
+    background-color: #55b81b;
+}
+
 h3.add {
     width: 100%;
     margin: 0;
@@ -165,6 +207,10 @@ input.line-text {
     background-color: #ebeef3;
 }
 
+.font-size{
+    font-size: 2em;
+}
+
 .line-height,
 .font-size {
 
@@ -176,24 +222,25 @@ input.line-text {
     background-color: #ffffff;
 }
 
-.main-nav ul li{
+.main-nav ul li {
     width: 7.25rem;
     height: 2.5rem;
     border-radius: 20px;
 }
+
 .main-nav ul li a:hover {
     color: #21ac91;
 }
 
-.checked{
-width: 7.25rem;
-height: 2.5rem;
-box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-background-color: #fefefe; 
+.checked {
+    width: 7.25rem;
+    height: 2.5rem;
+    box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    background-color: #fefefe;
 }
 
-.checked > *{
+.checked>* {
     color: #21ac91;
 }
 
@@ -233,6 +280,10 @@ background-color: #fefefe;
     flex-wrap: wrap;
 }
 
+.flex.align-strech{
+    align-items: stretch;
+}
+
 .hide {
     display: none;
 }
@@ -252,6 +303,15 @@ background-color: #fefefe;
     }
 
     .gallery.grid {
+        grid-gap: 20px;
+        padding: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        align-items: center;
+        background-color: #383b42;
+        border-radius: 5px;
+    }
+
+    .archive.grid {
         grid-gap: 20px;
         padding: 20px;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

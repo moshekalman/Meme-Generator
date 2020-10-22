@@ -27,9 +27,9 @@ function renderSavedGallery() {
     elGallery.innerHTML = strHTML;
 }
 
-function renderGallery() {
+function renderGallery(str = '') {
     var elGallery = document.querySelector('.gallery');
-    var imgs = getImgs();
+    var imgs = setFilter(str);
     var strHTML = '';
     imgs.forEach(img => {
         strHTML += `<img onclick="renderCanvas(${img.id}); openEditor()" src="${img.url}">`;
@@ -50,17 +50,17 @@ function drawText() {
     const currMeme = getMeme();
     var memeTexts = currMeme.lines;
     memeTexts.forEach(memeText => {
-        gCtx.lineWidth = '3';
+        gCtx.lineWidth = '2';
         gCtx.font = `${memeText.size}px ${memeText.font}`;
         gCtx.textAlign = memeText.align;
         gCtx.strokeStyle = 'white';
         var x;
-        if (memeText.align === 'left') x = 0;
+        if (memeText.align === 'left') x = 10;
         else if (memeText.align === 'center') x = gCanvas.width / 2;
-        else x = gCanvas.width;
-        gCtx.strokeText(memeText.txt, x, memeText.size + memeText.height);
+        else x = gCanvas.width - 10;
+        gCtx.strokeText(memeText.txt, x, 40 + memeText.height);
         gCtx.fillStyle = 'black';
-        gCtx.fillText(memeText.txt, x, memeText.size + memeText.height);
+        gCtx.fillText(memeText.txt, x, 40 + memeText.height);
     });
 }
 
@@ -85,10 +85,13 @@ function onLineHeightChange(diff) {
 function onSwitchLines() {
     switchLines();
     const currMeme = getMeme();
-    var memeText = currMeme.lines[getLineIdx()].txt;
+    const currLineIdx = getLineIdx();
+    const memeText = currMeme.lines[currLineIdx].txt;
     var elLineInput = document.querySelector('.line-text');
     elLineInput.value = '';
     elLineInput.placeholder = memeText;
+    const elSelect = document.querySelector('.font-select');
+    elSelect.value = currMeme.lines[currLineIdx].font;
 }
 
 function openGallery() {
@@ -164,4 +167,20 @@ function onCanvasClick(ev) {
     var currMeme = getMeme();
     const X = ev.offsetX;
     const Y = ev.offsetY;
+}
+
+function onSetFilter(str) {
+    return setFilter(str);
+}
+
+function onAlign(align) {
+    setAlign(align);
+    const currImgId = getCurrMemeIdx();
+    renderCanvas(currImgId);
+}
+
+function onChangeFont(font) {
+    changeFont(font);
+    const currImgId = getCurrMemeIdx();
+    renderCanvas(currImgId);
 }

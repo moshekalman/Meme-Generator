@@ -21,9 +21,13 @@
           </ul>
         </nav>
       </header>
-
       <main class="meme-gallery">
-<div class="gallery-container gallery grid">
+        <div class="gallery-container flex column">
+          <div class="search-container search-icon flex">
+              <input class="search-box" type="text" name="searchBox" id="searchBox" placeholder="Search" onkeyup="renderGallery(this.value)">
+              <img class="search-icon" src="/imgs/search_icn.svg">
+          </div>
+          <div class="gallery grid"></div>
 
 </div>
       </main>
@@ -55,8 +59,8 @@
       </button>
     </div>
   
-    <div class="font-properties flex space-between">
-        <button class="font-size" onclick="onFontSizeChange(+2)">A+</button>
+    <div class="font-properties flex wrap space-between just-center">
+        <button class="font-size" onclick="onFontSizeChange(2)">A+</button>
         <button class="font-size" onclick="onFontSizeChange(-2)">A-</button>
         <button class="line-height" onclick="onLineHeightChange(-10)">
           Higher
@@ -64,6 +68,20 @@
         <button class="line-height" onclick="onLineHeightChange(+10)">
           Lower
         </button>
+        <button class="line-height" onclick="onAlign('left')">
+          <img src="imgs/left.svg">
+        </button>
+        <button class="line-height" onclick="onAlign('center')">
+         <img src="imgs/center.svg">
+        </button>
+        <button class="line-height" onclick="onAlign('right')">
+         <img src="imgs/right.svg">
+        </button>
+        <select class="font-select" onchange="onChangeFont(this.value)">
+          <option value="impact">Impact</option>
+          <option value="arial">Arial</option>
+          <option value="poppins">Poppins</option>
+        </select>
       </div>
   <button class="save-btn" onclick="onSaveMeme()">Save Your Meme!</button>
   <button class="share-btn" onclick="onSaveMeme()">Share</button>

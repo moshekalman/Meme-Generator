@@ -70,6 +70,10 @@ button {
 
 /* Layout */
 
+.main-header {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+
 .logo {
     font-size: 1.5rem;
     font-family: PoppinsL, sans-serif;
@@ -90,6 +94,7 @@ button {
     padding: 10px;
     border-radius: 5px;
 }
+
 .gallery.grid {
     /* display: none; */
     grid-gap: 10px;
@@ -112,9 +117,13 @@ button {
     border-radius: 5px;
 }
 
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 
 .canvas-container {
-    margin: 0 auto;
     height: 400px;
     width: 400px;
     border-radius: 30px;
@@ -125,6 +134,12 @@ canvas {
     border: 5px solid #3d3d3d8f;
 }
 
+.meme-properties {
+    box-shadow: 1px 5px 0 #bbc4d11f, inset 0 5px 0 #ffffff1f;
+    border-radius: 30px;
+    background-color: #ebeef313;
+}
+
 .meme-editor,
 .saved-memes {
     padding: 20px;
@@ -133,7 +148,6 @@ canvas {
 .header-container {
     width: 100vw;
     height: 5rem;
-    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
     padding: 30px;
 }
 
@@ -142,7 +156,7 @@ canvas {
     height: 3em;
 }
 
-.search-container{
+.search-container {
     display: block;
     width: 100%;
     margin-bottom: 30px;
@@ -151,9 +165,12 @@ canvas {
 .search-icon {
     width: 1.9rem;
     height: 1.9rem;
+    align-self: center;
 }
 
 .search-box {
+    height: 3.625rem;
+    max-width: 541px;
     font-family: PoppinsL, sans-serif;
     flex-grow: 1;
     border-radius: 1.9rem;
@@ -212,7 +229,7 @@ canvas {
     font-family: PoppinsSB, sans-serif;
     color: #fff;
     font-size: 1.3rem;
-    width: 213px;
+    width: 150px;
     height: 51px;
     box-shadow: 1px 6px 0 #55b81b, inset 0 5px 0 #ffffff;
     border-radius: 15px;
@@ -284,6 +301,46 @@ input.line-text {
 
 .checked>* {
     color: #21ac91;
+}
+
+.share-btn {
+    width: 150px;
+    height: 51px;
+    box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff;
+    border-radius: 15px;
+    background-color: #1e7cd3;
+    color: #ffffff;
+    font-family: PoppinsSB;
+    font-size: 1.3em;
+}
+
+.share-container {
+    width: 150px;
+    height: 51px;
+    background-color: aqua;
+    box-shadow: 1px 6px 0 rgb(0, 187, 187), inset 0 5px 0 #ffffff;
+    border-radius: 15px;
+    font-family: PoppinsSB;
+    font-size: 1.3em;
+}
+
+.save-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.download-btn {
+    text-decoration: none;
+    width: 150px;
+    height: 51px;
+    box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #ffffff;
+    border-radius: 15px;
+    background-color: #8f44bb;
+    color: #ffffff;
+    font-family: PoppinsSB;
+    font-size: 1.3em;
 }
 
 /* helpers */
@@ -361,4 +418,5 @@ input.line-text {
         background-color: #383b42;
         border-radius: 5px;
     }
+
 }

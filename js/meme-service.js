@@ -32,6 +32,7 @@ var gMeme = {
             size: 40,
             align: 'center',
             color: 'black',
+            stroke: 'white',
             font: 'impact',
             height: 0
         },
@@ -40,6 +41,7 @@ var gMeme = {
             size: 40,
             align: 'center',
             color: 'black',
+            stroke: 'white',
             font: 'impact',
             height: 352
         }
@@ -112,6 +114,7 @@ function addLine() {
         size: 40,
         align: 'center',
         color: 'black',
+        stroke: 'white',
         font: 'impact',
         height: 180
     });
@@ -130,4 +133,16 @@ function setAlign(align) {
 
 function changeFont(font){
     gMeme.lines[gCurrLineIdx].font = font;
+}
+
+function changeColor(color){
+    gMeme.lines[gCurrLineIdx].color = color;
+}
+
+function changeColor(color){
+    gMeme.lines[gCurrLineIdx].color = color;
+}
+
+function changeStroke(color){
+    gMeme.lines[gCurrLineIdx].stroke = color;
 }

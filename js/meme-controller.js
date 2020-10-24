@@ -53,13 +53,13 @@ function drawText() {
         gCtx.lineWidth = '2';
         gCtx.font = `${memeText.size}px ${memeText.font}`;
         gCtx.textAlign = memeText.align;
-        gCtx.strokeStyle = 'white';
+        gCtx.strokeStyle = memeText.stroke;
         var x;
         if (memeText.align === 'left') x = 10;
         else if (memeText.align === 'center') x = gCanvas.width / 2;
         else x = gCanvas.width - 10;
         gCtx.strokeText(memeText.txt, x, 40 + memeText.height);
-        gCtx.fillStyle = 'black';
+        gCtx.fillStyle = memeText.color;
         gCtx.fillText(memeText.txt, x, 40 + memeText.height);
     });
 }
@@ -92,6 +92,10 @@ function onSwitchLines() {
     elLineInput.placeholder = memeText;
     const elSelect = document.querySelector('.font-select');
     elSelect.value = currMeme.lines[currLineIdx].font;
+    const elColorInput = document.querySelector('#color');
+    elColorInput.value = currMeme.lines[currLineIdx].color;
+    const elStrokeInput = document.querySelector('#strokeColor');
+    elStrokeInput.value = currMeme.lines[currLineIdx].stroke;
 }
 
 function openGallery() {
@@ -184,3 +188,53 @@ function onChangeFont(font) {
     const currImgId = getCurrMemeIdx();
     renderCanvas(currImgId);
 }
+
+function onChangeColor(color) {
+    changeColor(color);
+    const currImgId = getCurrMemeIdx();
+    renderCanvas(currImgId);
+}
+
+function onChangeStroke(color) {
+    changeStroke(color);
+    const currImgId = getCurrMemeIdx();
+    renderCanvas(currImgId);
+}
+
+function onDownloadMeme(elLink) {
+    var imgContent = gCanvas.toDataURL('image/jpeg');
+    elLink.download = 'new-meme'
+    elLink.href = imgContent
+}
+
+function uploadImg(elForm, ev) {
+    ev.preventDefault();
+    gCanvas.toDataURL("image/jpeg");
+
+    // A function to be called if request succeeds
+    function onSuccess(uploadedImgUrl) {
+        uploadedImgUrl = encodeURIComponent(uploadedImgUrl);
+        var elLink = document.querySelector('.share-container').innerHTML = `
+        <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+           Share   
+        </a>`;
+    }
+
+    doUploadImg(elForm, onSuccess);
+}
+
+function doUploadImg(elForm, onSuccess) {
+    var formData = new FormData(elForm);
+    fetch('http://ca-upload.com/here/upload.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function (res) {
+            return res.text();
+        })
+        .then(onSuccess)
+        .catch(function (err) {
+            console.error(err);
+        });
+}
+

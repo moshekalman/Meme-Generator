@@ -21,6 +21,7 @@ var gImgs = [{ id: 1, url: `meme-imgs/1.jpg`, keyWords: ['political'] },
 { id: 17, url: `meme-imgs/17.jpg`, keyWords: ['political', 'bamboozeled'] },
 { id: 18, url: `meme-imgs/18.jpg`, keyWords: ['cute', 'bamboozeled'] }
 ];
+var gSavedMemes = getSavedMemes();
 var gKeywords = ['cute', 'funny', 'troll', 'bamboozeled', 'political'];
 var gCurrLineIdx = 0;
 var gMeme = {
@@ -74,7 +75,7 @@ function changeMemeText(txt) {
     gMeme.lines[gCurrLineIdx].txt = txt;
 }
 
-function getCurrMemeIdx() {
+function getCurrMemeId() {
     return gMeme.selectedImgId;
 }
 
@@ -95,8 +96,9 @@ function getLineIdx() {
     return gCurrLineIdx;
 }
 
-function saveMemes(savedMemes) {
-    saveToLocalStorage(SAVED_MEMES, savedMemes);
+function saveMemes(src) {
+    gSavedMemes.push({ id: generateID(), imgSrc: src, meme: gMeme });
+    saveToLocalStorage(SAVED_MEMES, gSavedMemes);
 }
 
 function getSavedMemes() {
@@ -131,18 +133,25 @@ function setAlign(align) {
     gMeme.lines[gCurrLineIdx].align = align;
 }
 
-function changeFont(font){
+function changeFont(font) {
     gMeme.lines[gCurrLineIdx].font = font;
 }
 
-function changeColor(color){
+function changeColor(color) {
     gMeme.lines[gCurrLineIdx].color = color;
 }
 
-function changeColor(color){
+function changeColor(color) {
     gMeme.lines[gCurrLineIdx].color = color;
 }
 
-function changeStroke(color){
+function changeStroke(color) {
     gMeme.lines[gCurrLineIdx].stroke = color;
+}
+
+function setSavedMeme(id) {
+    var currMeme = gSavedMemes.find(meme => meme.id === id);
+    console.log(currMeme)
+    if(!currMeme) return
+    gMeme = currMeme.meme;
 }

@@ -1,7 +1,5 @@
 'use strict';
 
-var gSavedMemes = getSavedMemes();
-
 var gCanvas;
 var gCtx;
 
@@ -20,11 +18,20 @@ function init() {
 function renderSavedGallery() {
     var elGallery = document.querySelector('.archive');
     var strHTML = '';
-    gSavedMemes.forEach(meme => {
-        strHTML += `<img src="${meme}">`;
+    var saveMemes = getSavedMemes();
+    saveMemes.forEach(meme => {
+        strHTML += `<img onclick="handleSaveMeme('${meme.id}')" src="${meme.imgSrc}">`;
     });
 
     elGallery.innerHTML = strHTML;
+}
+
+function handleSaveMeme(id) {
+    setSavedMeme(id);
+    var imgId = getCurrMemeId();
+    console.log(imgId);
+    renderCanvas(imgId);
+    openEditor();
 }
 
 function renderGallery(str = '') {
@@ -66,19 +73,19 @@ function drawText() {
 
 function onNewText(txt) {
     changeMemeText(txt);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onFontSizeChange(diff) {
     changeFontSize(diff);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onLineHeightChange(diff) {
     changeLineHeight(diff);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
@@ -104,7 +111,7 @@ function openGallery() {
     const elEditor = document.querySelector('.meme-editor');
     elEditor.classList.remove('show');
     const elArchive = document.querySelector('.saved-memes');
-    elEditor.classList.remove('show');
+    elArchive.classList.remove('show');
 
     const elGalleryLi = document.querySelector('.gallery-link');
     elGalleryLi.classList.add('checked');
@@ -150,20 +157,19 @@ function openArchive() {
 
 function onSaveMeme() {
     const meme = gCanvas.toDataURL();
-    gSavedMemes.push(meme);
-    saveMemes(gSavedMemes);
+    saveMemes(meme);
     renderSavedGallery();
 }
 
 function onAddLine() {
     addLine();
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onDeleteLine() {
     deleteLine();
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
@@ -171,6 +177,11 @@ function onCanvasClick(ev) {
     var currMeme = getMeme();
     const X = ev.offsetX;
     const Y = ev.offsetY;
+    console.log(currMeme, X, Y);
+    currMeme.lines.forEach(line =>{
+        console.log(line)
+    })
+
 }
 
 function onSetFilter(str) {
@@ -179,32 +190,32 @@ function onSetFilter(str) {
 
 function onAlign(align) {
     setAlign(align);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onChangeFont(font) {
     changeFont(font);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onChangeColor(color) {
     changeColor(color);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onChangeStroke(color) {
     changeStroke(color);
-    const currImgId = getCurrMemeIdx();
+    const currImgId = getCurrMemeId();
     renderCanvas(currImgId);
 }
 
 function onDownloadMeme(elLink) {
     var imgContent = gCanvas.toDataURL('image/jpeg');
-    elLink.download = 'new-meme'
-    elLink.href = imgContent
+    elLink.download = 'new-meme';
+    elLink.href = imgContent;
 }
 
 function uploadImg(elForm, ev) {
@@ -236,5 +247,10 @@ function doUploadImg(elForm, onSuccess) {
         .catch(function (err) {
             console.error(err);
         });
+}
+
+function onToggleMenu() {
+    const elNav = document.querySelector('.nav-list');
+    elNav.classList.toggle('hide');
 }
 

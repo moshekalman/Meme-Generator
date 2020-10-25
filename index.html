@@ -10,21 +10,31 @@
     <header class="main-header">
       <div class="container header-container flex space-between align-center">
         <h1 class="logo">MemeZ</h1>
-        <nav class="main-nav">
+        <nav class="main-nav flex space-between">
           <div class="hamburger hidePNG">
-            <img  src="imgs/Hamburger.svg" alt="Menu">
+            <img onclick="onToggleMenu()"  src="imgs/Hamburger.svg" alt="Menu">
           </div>
-          <ul class="clean-list hide">
+          <ul class="nav-list clean-list flex space-between hide">
             <li class="gallery-link flex align-center just-center"><a onclick="openGallery()" >Gallery </a></li>
             <li  class="editor-link flex align-center just-center"><a onclick="openEditor()" >Editor</a></li>
-            <li class="archive-link flex align-center just-center"><a onclick="openArchive()">Saved Memes</a></li>
+            <li class="archive-link flex align-center just-center"><a onclick="openArchive()">Memes</a></li>
           </ul>
         </nav>
       </header>
       <main class="meme-gallery">
         <div class="gallery-container container flex column">
-          <div class="search-container flex">
+          <div class="search-container flex align-center space-around">
+            <div class="search-text-box">
               <input class="search-box" type="text" name="searchBox" id="searchBox" placeholder="Search" onkeyup="renderGallery(this.value)">
+              <img class="search-icon" src="/imgs/search_icn.svg" >
+            </div>
+              <div class="search-words flex space-around align-center">
+                <h5 onclick="renderGallery('')">All</h5>
+                <h5 onclick="renderGallery('cute')">Cute</h5>
+                <h5 onclick="renderGallery('funny')">Funny</h5>
+                <h5 onclick="renderGallery('troll')">Troll</h5>
+                <h5 onclick="renderGallery('bamboozeled')">Bamboozeled</h5>
+              </div>
           </div>
           <div class="gallery grid"></div>
 
@@ -32,9 +42,12 @@
       </main>
 
       <main class="meme-editor hide">
-        <div class="editor-container container flex wrap space-around align-center">
+        <div class="editor-container container flex space-around align-center">
           <div class="canvas-container">
             <canvas id="my-canvas" height="400" width="400" onclick="onCanvasClick(event)"></canvas>
+            <div class="select-box">
+
+            </div>
         </div>
   <div class="meme-properties flex column space-around align-center">
     <input
@@ -81,10 +94,15 @@
           <option value="arial">Arial</option>
           <option value="poppins">Poppins</option>
         </select>
-        <input type="color"
-        name="color"
-        id="color"
-         class="line-height" onchange="onChangeColor(this.value)"> 
+        <div class="color-content flex just-center align-center">
+          <div class="line-height">
+            <img class="color-icn" src="imgs/bgc_icon.svg">
+            <input type="color"
+            name="color"
+            id="color"
+             class="color-input" onchange="onChangeColor(this.value)"> 
+          </div>
+        </div>
            <input
            type="color"
         name="strokeColor"
